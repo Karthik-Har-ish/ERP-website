@@ -1,0 +1,34 @@
+:root{
+    --primary:#90323D;
+    --secondary:#D9CAB3;
+    --accent:#BC8034;
+    --border-color:#8c7a6b;
+  }
+  
+
+.icon-and-navbar-pages{
+    background-color: var(--secondary);
+    color:var(--primary);
+    padding: 2.5vw;
+}
+
+.icon{
+    padding: 0px 1.75vw;
+}
+
+.navbar-align{
+    display: flex;
+    align-items: center;
+}
+.page{
+    padding: 0px 1.75vw;
+    width: fit-content;
+}
+.page-button{
+    background-color: inherit;
+    border: none;
+    font-size: inherit;
+    color: inherit;
+    padding: 0px;
+    width: fit-content;
+}

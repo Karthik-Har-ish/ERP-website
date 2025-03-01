@@ -1,7 +1,39 @@
+:root{
+  --primary:#90323D;
+  --secondary:#D9CAB3;
+  --accent:#BC8034;
+  --border-color:#8c7a6b;
+  background-color: var(--primary);
+}
+
+
 .login-root{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100vw;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.secondary-background{
+    background-color: var(--secondary);
+    font-size: 20px;
+    color:var(--primary);
+}
+
+button{
+    border: 1px solid var(--accent);
+
+}
+button:hover{
+    cursor: pointer;
+}
+
+button:active{
+    border: 2px solid var(--accent);
+    background-color: var(--accent);
+}
+
+a{
+    color: var(--secondary);
+    font-size: 20px;
 }
