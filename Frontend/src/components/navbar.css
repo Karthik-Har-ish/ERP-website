@@ -23,6 +23,9 @@
 .page{
     padding: 0px 1.75vw;
     width: fit-content;
+    color: var(--primary);
+    font-size: 24px;
+    text-decoration: none;
 }
 .page-button{
     background-color: inherit;
@@ -31,4 +34,10 @@
     color: inherit;
     padding: 0px;
     width: fit-content;
+}
+.grid{
+    width: 90vw;
+    place-self: center;
+    display: flex;
+    justify-content: space-around;
 }

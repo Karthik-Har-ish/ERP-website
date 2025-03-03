@@ -1,11 +1,17 @@
 import * as React from 'react';
 import "./navbar.css"
-
-const pages = ['Dashboard', 'Academics', 'Attendance', 'Payments', 'profile'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { Link } from 'react-router-dom'
+const pages = {
+    'Dashboard':"/dashboard",
+    'Academics':"/academics",
+    'Attendance':"/attendance", 
+    'Payments':"/payment",
+    'profile':"/profile"
+}
 
 function ResponsiveAppBar() {
-
+    
+    console.log(pages[Object.keys(pages)[1]])
 
 
   return (
@@ -18,10 +24,10 @@ function ResponsiveAppBar() {
         </div>
         <div className="pages navbar-align">
             {
-                pages.map((page)=>{
+                Object.keys(pages).map((page)=>{
                     return(
-                        <button className='page-button'>
-                            <h6 className='page'>{page}</h6>
+                        <button key={page} className='page-button'>
+                            <Link className='page' to={pages[page]}>{page}</Link>
                         </button>
                         
                     )

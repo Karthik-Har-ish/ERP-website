@@ -1,0 +1,10 @@
+.mark-card{
+    width: 8vw;
+    border-radius: 1vw;
+    padding: 2vw;
+    margin: 2vw;
+    color: #90323D;
+}
+.marks{
+    display: flex;
+}

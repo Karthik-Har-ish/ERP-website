@@ -1,0 +1,29 @@
+.calendar{
+    width: 40vw;
+    font-size: 1vw;
+    position: absolute;
+    top: 20vw;
+    right: 10vh;
+    height: 40vh;
+}
+.react-calendar__navigation{
+    display: flex;
+}
+.react-calendar__navigation > button  {
+    background-color: #D9CAB3;
+    color: #90323D;
+    min-height: 1vh;
+    padding: 0.25vw;
+    font-size: 1.25vw;
+}
+.react-calendar__month-view__days > button{
+    background-color: #D9CAB3;
+    color: #90323D;
+    min-height: 1vh;
+    padding: 0.25vw;
+    font-size: 1.25vw;
+    border-radius: 0px;
+}
+.react-calendar__month-view__weekdays{
+    text-align: center;
+}

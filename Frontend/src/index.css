@@ -92,3 +92,21 @@ p{
 .mt-5{
   margin-top: 5vw;
 }
+.ml-1{
+  margin-left: 1vw;
+}
+.ml-2{
+  margin-left: 2vw;
+}
+.ml-3{
+  margin-left: 3vw;
+}
+.ml-4{
+  margin-left: 4vw;
+}
+.ml-5{
+  margin-left: 5vw;
+}
+.secondary{
+  background-color: var(--secondary);
+}
