@@ -6,6 +6,7 @@ import Academics from './components/Academics'
 import Attendance from './components/Attendance'
 import Payment from './components/Payment'
 import Profile from './components/Profile'
+import AddUser from './components/AddUser'
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/attendance' element={<Attendance/>}></Route>
         <Route path='/payment' element={<Payment/>}></Route>
         <Route path='/profile' element={<Profile/>}></Route>
+        <Route path='/add-user' element={<AddUser/>}></Route>
     </Routes>
   )
 }
