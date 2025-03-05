@@ -37,3 +37,10 @@ a{
     color: var(--secondary);
     font-size: 20px;
 }
+.select{
+    margin-bottom: 2vw;
+    padding: 2vh;
+    border-radius: 0.5vw;
+    min-width: 10vw ;
+    text-align: center;
+}

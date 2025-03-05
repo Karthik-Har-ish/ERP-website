@@ -18,10 +18,10 @@ const Login = () => {
         <input 
         type="text"
         className='input secondary-background'
-        id='roll-number'
-        aria-label='roll-number'
-        placeholder='Roll Number'
-        
+        id='username'
+        name='username'
+        aria-label='username'
+        placeholder='Username'
         />  
         <input
         id="outlined-adornment-password"
@@ -32,6 +32,11 @@ const Login = () => {
         placeholder='Password'
         />
         
+        <select name="cars" className='secondary-background select' id="cars">
+          <option value="Student">Student</option>
+          <option value="Teacher">Teacher</option>
+          <option value="Admin">Admin</option>
+        </select>
 
         <button
             variant='outlined'
