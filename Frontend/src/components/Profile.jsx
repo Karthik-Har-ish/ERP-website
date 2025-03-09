@@ -11,7 +11,9 @@ const Profile = () => {
             <h5>Class</h5>
             <h5>email</h5>
           </div>
-          <div className="pht"></div>
+          <div className="user-photo">
+            <img src="" alt="image not found" />
+          </div>
         </div>
     </div>
   )
