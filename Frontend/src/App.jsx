@@ -7,6 +7,7 @@ import Attendance from './components/Attendance'
 import Payment from './components/Payment'
 import Profile from './components/Profile'
 import AddUser from './components/AddUser'
+import AllUsers from './components/AllUsers'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path='/payment' element={<Payment/>}></Route>
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/add-user' element={<AddUser/>}></Route>
+        <Route path='/all-users' element={<AllUsers/>}></Route>
     </Routes>
   )
 }

@@ -6,7 +6,8 @@ const pages = {
     'Academics':"/academics",
     'Attendance':"/attendance", 
     'Payments':"/payment",
-    'profile':"/profile"
+    'Profile':"/profile",
+    'All Users':"/all-users"
 }
 
 function ResponsiveAppBar() {

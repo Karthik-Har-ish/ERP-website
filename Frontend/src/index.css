@@ -110,3 +110,8 @@ p{
 .secondary{
   background-color: var(--secondary);
 }
+.content{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

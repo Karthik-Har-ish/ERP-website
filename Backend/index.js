@@ -3,9 +3,11 @@ require("dotenv").config();
 require("./connection");
 const studentModel = require("./models/student.js");
 const teacherModel = require("./models/teacher.js");
+const adminModel = require("./models/admin.js");
 const app = express();
 const PORT = process.env.PORT;
 const cors = require("cors");
+const teacher = require("./models/teacher.js");
 
 // middleware
 
@@ -14,11 +16,31 @@ app.use(express.json());
 
 
 // api
-app.post("/add-user",async (req,res)=>{
+app.post("/add-student",async (req,res)=>{
     try {
         await studentModel(req.body).save();
-        res.send("Added user successfully!");
-        console.log("Added user successfully!");
+        res.send("Added student successfully!");
+        console.log("Added student successfully!");
+    } catch (error) {
+        console.log(err);
+    }
+})
+
+
+app.post("/add-teacher",async (req,res)=>{
+    try {
+        await teacherModel(req.body).save();
+        res.send("Added teacher successfully!");
+        console.log("Added teacher successfully!");
+    } catch (error) {
+        console.log(err);
+    }
+})
+app.post("/add-admin",async (req,res)=>{
+    try {
+        await adminModel(req.body).save();
+        res.send("Added admin successfully!");
+        console.log("Added admin successfully!");
     } catch (error) {
         console.log(err);
     }
@@ -27,17 +49,25 @@ app.post("/add-user",async (req,res)=>{
 
 app.post("/login",async (req,res)=>{
     try {
-        const user = await studentModel.findOne(
-            {   
-                username:req.body.username
-            });
+        const userType = req.body.userType;
+        let user;
+        if(userType == "Student"){
+            user = await studentModel.findOne({username:req.body.username}) 
+        }
+        else if(userType == "Teacher"){
+            user = await teacherModel.findOne({username:req.body.username}) 
+        } 
+        else if(userType == "Admin"){
+            user = await adminModel.findOne({username:req.body.username}) 
+        }
         if(!user){
             return res.json({message:"User not found!"});
         }
         if(req.body.password!=user.password){
+            console.log(user)
             return res.send({message:"You've given the wrong password to this account!"});
         }
-        return res.send({message:`Hello ${user.nickname}!`,user});
+        return res.send({message:`Hello ${user.name.fname}!`,user});
     } catch (error) {
         console.log(error);
     }
@@ -56,10 +86,29 @@ app.delete("/user-delete/:id", async (req,res)=>{
     }
 })
 
-app.get("/all-users",async (req,res)=>{
+app.get("/all-students",async (req,res)=>{
    try{
     console.log("Here!")
     res.send({users:await studentModel.find()})
+   }
+   catch(err){
+    res.json({error:err})
+   }
+})
+
+app.get("/all-teachers",async (req,res)=>{
+   try{
+    console.log("Here!")
+    res.send({users:await teacherModel.find()})
+   }
+   catch(err){
+    res.json({error:err})
+   }
+})
+app.get("/all-admins",async (req,res)=>{
+   try{
+    console.log("Here!")
+    res.send({users:await adminModel.find()})
    }
    catch(err){
     res.json({error:err})

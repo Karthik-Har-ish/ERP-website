@@ -8,45 +8,60 @@ import Logo from './Logo'
 const Login = () => {
     const [showPassword, setShowPassword] = React.useState(false);
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const passwordVisibletoggle = () => setShowPassword((show) => !show);
 
+
+    const loginUser = (formData) => {
+      const userType = formData.get("usertype");
+      const username = formData.get("username");
+      const password = formData.get("password");
+
+    }
   return (
-    <div className='center login-root'>
-        <Logo></Logo>
+    
 
+        <form action={loginUser}>
+          <div className='center login-root'>
 
-        <input 
-        type="text"
-        className='input secondary-background'
-        id='username'
-        name='username'
-        aria-label='username'
-        placeholder='Username'
-        />  
-        <input
-        id="outlined-adornment-password"
-        className='input secondary-background'
-        type={showPassword ? 'text' : 'password'}
-        label="Password"
-        aria-label="Password"
-        placeholder='Password'
-        />
-        
-        <select name="cars" className='secondary-background select' id="cars">
-          <option value="Student">Student</option>
-          <option value="Teacher">Teacher</option>
-          <option value="Admin">Admin</option>
-        </select>
+            <h1>COLLEGE ERP:</h1>
 
-        <button
-            variant='outlined'
-            className='secondary-background'
-            >
-            Login
-        </button>
+            <input 
+            type="text"
+            className='input secondary-background'
+            id='username'
+            name='username'
+            aria-label='username'
+            placeholder='Username'
+            />
+
+            <input
+            id="outlined-adornment-password"
+            className='input secondary-background'
+            type={showPassword ? 'text' : 'password'}
+            label="Password"
+            aria-label="Password"
+            placeholder='Password'
+            name='password'
+            />
+            
+            <select name="usertype" className='secondary-background select' id="cars">
+              <option value="Student">Student</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Admin">Admin</option>
+            </select>
+
+            <button
+                variant='outlined'
+                className='secondary-background'
+                >
+                Login
+            </button>
             <br /> <br />
-        <Link>Forgot password?</Link>
-        </div>
+
+            <Link>Forgot password?</Link>
+          </div>
+        </form>
+        
   )
 }
 
