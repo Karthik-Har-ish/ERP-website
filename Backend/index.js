@@ -8,6 +8,7 @@ const app = express();
 const PORT = process.env.PORT;
 const cors = require("cors");
 const teacher = require("./models/teacher.js");
+const jwt = require('jsonwebtoken')
 
 // middleware
 
@@ -67,7 +68,8 @@ app.post("/login",async (req,res)=>{
             console.log(user)
             return res.send({message:"You've given the wrong password to this account!"});
         }
-        return res.send({message:`Hello ${user.name.fname}!`,user});
+        const token = jwt.sign({ userId: user.id }, "secret-key", { expiresIn: "1h" });
+        return res.json({ message: "Login successful", token, user });
     } catch (error) {
         console.log(error);
     }
@@ -115,15 +117,38 @@ app.get("/all-admins",async (req,res)=>{
    }
 })
 
-app.get("/all-students",async (req,res)=>{
+app.get("/user/:id",async (req,res)=>{
    try{
     console.log("Here!")
+    let user = await studentModel.findById(req.params.id)
+    console.log(user)
+    if(user===null){
+        user = await teacherModel.findById(req.params.id)
+        console.log(user)
+
+    }
+    if(user===null){
+        user = await adminModel.findById(req.params.id)
+        console.log(user)
+    }
+    res.json({user,message:'user found!'})
+}
+   catch(err){
+    res.json({error:err})
+   }
+})
+
+app.get("/all-users",async (req,res)=>{
+   try{
     try{
-        console.log("Here!")
-        res.send({users:await studentModel.find({})})
+        const students = await studentModel.find({})
+        const teachers= await teacherModel.find({})
+        const admins= await adminModel.find({})
+        res.send({students,teachers,admins})
        }
        catch(err){
         res.json({error:err})
+        console.log(err)
        }
    }
    catch(err){

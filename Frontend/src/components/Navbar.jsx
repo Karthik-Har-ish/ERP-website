@@ -7,14 +7,11 @@ const pages = {
     'Attendance':"/attendance", 
     'Payments':"/payment",
     'Profile':"/profile",
-    'All Users':"/all-users"
+    'All Users':"/all-users "
 }
 
 function ResponsiveAppBar() {
     
-    console.log(pages[Object.keys(pages)[1]])
-
-
   return (
    <>
     <div className="icon-and-navbar-pages navbar-align">

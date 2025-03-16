@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from "./Navbar"
 import { Line, Bar } from 'react-chartjs-2'
 import { attendance,marks } from "./fakeAttendance.js"
 import Card from '@mui/material/Card';
 import Grid2 from '@mui/material/CardContent';
+import axios from 'axios'
 
 
 import {
@@ -32,6 +33,19 @@ ChartJS.register(
 
 const Dashboard = () => {
 
+  const [user,setUser] = React.useState({})
+
+  useEffect(()=>{
+    axios.get(import.meta.env.VITE_REACT_APP_API_LINK+'/user/'+localStorage.getItem('userId'))
+    .then((res)=>{
+      setUser(res)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  },[])
+
+  console.log(user.data)
   const options = { 
     scales: {
       y : {

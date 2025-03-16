@@ -1,5 +1,5 @@
 import Navbar from "./Navbar"
-import {TextField, Typography, Button} from "@mui/material"
+import {TextField, Typography, Button, Grid2} from "@mui/material"
 
 export default function AddUser(){
 
@@ -8,9 +8,7 @@ export default function AddUser(){
 
   function handleChange(e){
 
-    setProduct({...product,[e.currentTarget.name]:e.currentTarget.value})
-    console.log({[e.currentTarget.name]:e.currentTarget.value})
-    console.log(product)
+    
   }
 
   function updateUser(){
@@ -18,26 +16,27 @@ export default function AddUser(){
   }
     return(
         <>
-            <Navbar></Navbar>
-            <form>
-      <Typography variant="h3" sx={{marginLeft:"6vw",marginTop:"40px"}}>Add Product:</Typography>
+          <Navbar></Navbar>
+          <form>
+            <Typography variant="h3" sx={{marginLeft:"6vw",marginTop:"40px"}}>Add Product:</Typography>
 
-      <div className='inputs'>
-      {textfields.map((name)=>{
-        return(
-          <TextField 
-          key={name}
-          sx={{marginTop:"20px",backgroundColor:"white",width:"30vw",borderRadius:"20px"}} 
-          label={name} 
-          defaultValue={(product[name]===null)?"":product[name]} 
-          name={name} 
-          onChange={handleChange}></TextField>
-        )
-      })}
-      <Button onClick={(location.state===null)?addProduct:updateProduct} variant='contained' sx={{marginTop:"20px",marginLeft:'1vw'}}>{(location.state===null)?"Add Product!":"Update Product!"}</Button>
-      </div>
+              <div className='inputs'>
+              {textfields.map((name)=>{
+                return(
+                  <Grid2 sx={{marginLeft:"5vw"}}>
+                  <TextField 
+                  key={name}
+                  sx={{marginTop:"20px",backgroundColor:"#D9CAB3",color:"#90323D",width:"80vw",borderRadius:"20px"}} 
+                  label={name} 
+                  name={name} 
+                  onChange={handleChange}></TextField>
+                  </Grid2>
+                )
+              })}
+              <Button variant='contained' sx={{marginTop:"20px",marginLeft:'1vw',backgroundColor:"#D9CAB3",color:"#90323D",height:"60px",width:"40vw",marginBottom:"20vh",}}>Add user</Button>
       
-      </form>
+            </div>
+        </form>
         </>
     )
 }
