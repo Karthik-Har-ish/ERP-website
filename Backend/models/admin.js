@@ -10,7 +10,7 @@ const admin = mongoose.Schema({
     profilePhoto:String,
     email:String,
     password:String,
-
+    userType:String,
 })
 
 module.exports = mongoose.model("Admin",admin)

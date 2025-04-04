@@ -11,8 +11,8 @@ const teacher = mongoose.Schema({
     email:String,
     password:String,
     classes:[],
-    subject:String
-
+    subject:String,
+    userType:String
 })
 
 module.exports = mongoose.model("Teacher",teacher)

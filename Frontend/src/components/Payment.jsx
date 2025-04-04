@@ -1,9 +1,24 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import axios from 'axios'
 import Navbar from "./Navbar"
 import Table from "./Table"
 import { Button } from '@mui/material'
 
 const Payment = () => {
+  const [user,setUser] = React.useState({})
+  
+    useEffect(()=>{
+      axios.get(import.meta.env.VITE_REACT_APP_API_LINK+'/user/'+localStorage.getItem('userId'))
+      .then((res)=>{
+        setUser(res)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },[])
+    console.log(user.data)
+
+
   return (
     <div>
       <Navbar></Navbar>

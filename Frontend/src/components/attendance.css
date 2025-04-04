@@ -27,3 +27,8 @@
 .react-calendar__month-view__weekdays{
     text-align: center;
 }
+.center{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

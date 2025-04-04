@@ -2,7 +2,8 @@ import React from 'react'
 import Navbar from "./Navbar"
 import Card from '@mui/material/Card';
 import axios from 'axios'
-import { Button, CardActions, CardContent, CardMedia, Grid2, Typography } from '@mui/material';
+import { Button, CardActions, CardMedia, Grid2 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 const AllUsers = () => {
@@ -21,64 +22,62 @@ const AllUsers = () => {
     .catch((err)=>{
         console.log(err)
     })
-    console.log(users)
         },
         []
     )
+    
     console.log(users)
-
   return (
     <div>
         <Navbar></Navbar>
         <div className='mt-3 ml-3'>
             <h1>Students:</h1>
             <div className="grid">
-                <UserCard users={users.students}/>
+                <UserCard users={users.students} type='Student'/>
             </div>
         </div>
         <div className='mt-3 ml-3'>
             <h1>Teachers:</h1>
             <div className="grid">
-                <UserCard users={users.teachers}/>
+                <UserCard users={users.teachers} type='Teacher'/>
             </div>
         </div>
         <div className='mt-3 ml-3'>
             <h1>Admins:</h1>
             <div className="grid">
-                <UserCard users={users.admins}/>
+                <UserCard users={users.admins} type='Admin'/>
             </div>
         </div>
     </div>
   )
 }
 
+const UserCard = ({users,type}) => {
 
-const Users = ({users}) => {
+    const navigate = useNavigate()
 
-    
-    const studentEls = users.map((user)=>{
-        return (<>
-        <Card className='user' sx={{ width:"40vw", height:"50vh", marginLeft:"2vw",backgroundColor:"#D9CAB3" }}>
-
-            <img className='profile-photo' src={user.profilePhoto} alt="profile photo" />
-            <h1>{user.name.fname+" "+user.name.lname}</h1>
-        </Card>
-        </>)
-    })
-    
-  return (
-    <div className='grid'>
-        {studentEls}
-    </div>
-  )
-}
+    function deleteUser(userId,type){
+        console.log(type)
+        axios.delete(import.meta.env.VITE_REACT_APP_API_LINK+'/user/'+userId,
+            {data:{
+                type:type
+            }}
+            
+        )
+        .then((res)=>{
+            console.log("user:",res.data)
+        })
+        .catch((err)=>{console.log(err)})
+        window.location.reload()    
+    }
 
 
-const UserCard = ({users}) => {
+    function updateUser(){
+        navigate("/product-add",{state:{val}})
+    }
     const userEls = users.map((user)=>{
-        console.log(user.class)
         return (<>
-        <Grid2>
+        <Grid2 key={user._id}>
         <Card className='user' sx={{ width:"40vw", height:"50vh", marginLeft:"2vw", marginTop:"2vh",backgroundColor:"#D9CAB3" }}>
 
         <CardMedia
@@ -88,17 +87,21 @@ const UserCard = ({users}) => {
           title={user.username}
           aria-label={user.username}
         />
-            <h1>{user.name.fname+" "+user.name.lname}</h1>
+            <div className='center'>
+            {user.name!=undefined?<h1>{user.name.fname+" "+user.name.lname}</h1>:null}
             {user.class===undefined?null:<h2>Class: {user.class}</h2>}
             {user.subject===undefined?null:<h2>Subject: {user.subject}</h2>}
-            
+            </div>
             <CardActions>
-                <Button size="small" sx={{color:"#90323D"}}>Update</Button>
-                <Button size="small" sx={{color:"#90323D"}}>Delete</Button>
+                <Button size="small" sx={{color:"#90323D"}} onClick={updateUser}>Update</Button>
+                <Button size="small" sx={{color:"#90323D"}} onClick={()=>{console.log(user._id);deleteUser(user._id,type)}}>Delete</Button>
             </CardActions>
         </Card>
         </Grid2>
-        </>)})
+        </>
+            )
+        }
+    )
     return(
         <>
         <Grid2>

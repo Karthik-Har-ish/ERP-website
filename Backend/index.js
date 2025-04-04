@@ -78,15 +78,6 @@ app.post("/login",async (req,res)=>{
 // TODO : REMOVE THIS !!!!
 
 
-// PRODUCT DELETION
-app.delete("/user-delete/:id", async (req,res)=>{
-    try {
-        await studentModel.findByIdAndDelete(req.params.id)
-        res.send("user deleted!")
-    } catch (error) {
-        console.log(error)
-    }
-})
 
 app.get("/all-students",async (req,res)=>{
    try{
@@ -165,6 +156,39 @@ app.put("/user/:id", async (req,res)=>{
     catch(err){
         console.log(err)
         res.json({message:"User updation failed!"})
+    }
+})
+
+app.delete("/user/:id", async (req,res)=>{
+    try{
+        
+        const usertype = req.body.type;
+        console.log("delete following user:"+req.params.id+" ");
+        console.log(req.body);
+        console.log(usertype);
+        const id = req.params.id
+        if(usertype==="Student"){
+            console.log("delete following student:"+id)
+            await studentModel.findByIdAndDelete(id)
+            res.json({message:"User deleted!"})
+            console.log({message:"User deleted!"})
+        }
+        else if(usertype==="Teacher"){
+            await teacherModel.findByIdAndDelete(req.params.id)
+            res.json({message:"User deleted!"})
+            console.log({message:"User deleted!"})
+        }
+        else if(usertype==="Admin"){
+            await adminModel.findByIdAndDelete(req.params.id)
+            res.json({message:"User deleted!"})
+            console.log({message:"User deleted!"})
+        }
+        
+        
+    }
+    catch(err){
+        console.log(err)
+        res.json({message:"User deletion failed!"})
     }
 })
 

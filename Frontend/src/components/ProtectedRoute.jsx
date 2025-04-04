@@ -1,17 +1,19 @@
+import { Login } from '@mui/icons-material';
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 
 const ProtectedRoute = ({Component}) => {
     const navigate = useNavigate()
-    const webtoken = localStorage.getItem('userId');
+    const webtoken = sessionStorage.getItem('token');
     
-    return (
-    webtoken===null?
-    <a className='center mt-4' href={import.meta.env.VITE_REACT_APP_FRONTEND_LINK}>Go to Login page</a>
-    
-    :<Component/>
-    
-  )
+    if(webtoken!=null)
+      {
+        return(<Component/>)
+      }
+    else{
+      
+      return <Link className='center mt-5' to="/">Login page</Link>
+    }
 }
 
 export default ProtectedRoute

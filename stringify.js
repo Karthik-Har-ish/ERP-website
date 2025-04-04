@@ -1,16 +1,12 @@
-const mongoose = require("mongoose")
-require("dotenv").config()
-
-const student = mongoose.Schema({
-    username:{type:String},
+const toString = {
+    username:String,
     name:{
-        fname:{type:String},
-        lname:{type:String}
+        fname:String,
+        lname:String
     },
-    userType:String,
-    profilePhoto:{type:String},
-    email:{type:String},
-    password:{type:String},
+    profilePhoto:String,
+    email:String,
+    password:String,
     class:{type:String, enum:["A","B","C","D"]},
     subjects:{
         subject1:{
@@ -59,8 +55,7 @@ const student = mongoose.Schema({
         subject5:String,
         subject6:String,
     }
-})
+}
 
 
-
-module.exports = mongoose.model("Student",student)
+console.log(JSON.stringify(toString))

@@ -1,17 +1,52 @@
 import * as React from 'react';
 import "./navbar.css"
 import { Link } from 'react-router-dom'
-const pages = {
+import { WindowOutlined } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+const studentPages = {
     'Dashboard':"/dashboard",
     'Academics':"/academics",
     'Attendance':"/attendance", 
     'Payments':"/payment",
     'Profile':"/profile",
-    'All Users':"/all-users "
+}
+const teacherPages = {
+    'Dashboard':"/dashboard",
+    'Academics':"/academics",
+    'Attendance':"/attendance", 
+    'Payments':"/payment",
+    'Profile':"/profile",
+    'All Users':"/all-users ",
+    'Add User':"/add-user "
+}
+const adminPages = {
+    'Dashboard':"/dashboard",
+    'Profile':"/profile",
+    'All Users':"/all-users ",
+    'Add User':"/add-user "
 }
 
 function ResponsiveAppBar() {
-    
+
+    const navigate = useNavigate()
+    let pages;
+    const accessLevel = localStorage.getItem("access")
+    if(accessLevel==="Admin"){
+        pages=adminPages;
+    }
+    else if(accessLevel==="Teacher"){
+        pages=teacherPages
+    }
+    else if(accessLevel==="Student"){
+        pages=studentPages
+    }
+
+const logout = ()=>{
+    localStorage.removeItem('access');
+    localStorage.removeItem('userId');
+    sessionStorage.removeItem('token');
+    navigate('/')
+}
   return (
    <>
     <div className="icon-and-navbar-pages navbar-align">
@@ -32,6 +67,9 @@ function ResponsiveAppBar() {
                 })
             }
         </div>
+        <button className='page-button logout-btn' onClick={logout}>
+            Log out
+        </button>
     </div>
    </>
   );
