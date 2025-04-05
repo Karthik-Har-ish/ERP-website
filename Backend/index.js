@@ -159,7 +159,7 @@ app.post("/update-student", async (req, res) => {
     }
 });
 
-// Update Teacher
+//
 app.post("/update-teacher", async (req, res) => {
     try {
         const { _id, ...updateData } = req.body;
@@ -172,7 +172,7 @@ app.post("/update-teacher", async (req, res) => {
     }
 });
 
-// Update Admin
+
 app.post("/update-admin", async (req, res) => {
     try {
         const { _id, ...updateData } = req.body;
@@ -217,8 +217,6 @@ app.delete("/user/:id", async (req,res)=>{
         res.json({message:"User deletion failed!"})
     }
 })
-
-// attendance checking across subjects
 
 app.get("/attendance/:id",async (req,res) => {
     try{

@@ -33,17 +33,13 @@ useEffect(() => {
     setUser(prev => ({ 
       ...prev, 
       userType: newUserType,
-      // Clear fields that might be specific to previous user type
       class: undefined,
       subject: undefined
     }))
-  }
-
-  // Consolidated handleChange function that works for all fields
+  
   function handleChange(e) {
     const { name, value } = e.target
-    
-    // Handle nested name fields (fname, lname)
+  
     if (name === 'fname' || name === 'lname') {
       setUser(prev => ({
         ...prev,
@@ -52,8 +48,7 @@ useEffect(() => {
           [name]: value
         }
       }))
-    } 
-    // Handle all other fields
+    }
     else {
       setUser(prev => ({
         ...prev,
@@ -69,12 +64,8 @@ useEffect(() => {
       Admin: isEditMode ? '/update-admin' : '/add-admin'
     }[userType]
 
-
-    
-    // Prepare the data to send
     const userData = {
       ...user,
-      // Ensure name object is properly structured
       name: {
         fname: user.name.fname,
         lname: user.name.lname
@@ -85,9 +76,7 @@ useEffect(() => {
     axios.post(import.meta.env.VITE_REACT_APP_API_LINK + endpoint, userData)
       .then((res) => {
         alert(res.data.message)
-        // Reset form after successful submission
         if (!isEditMode) {
-          // Reset form after successful submission
           setUser({ 
             userType: userType,
             name: { fname: '', lname: '' } 
@@ -137,8 +126,6 @@ useEffect(() => {
         </FormControl>
       )
     }
-
-    // For name fields (fname, lname), we need to look in user.name
     const value = field.name in user ? 
       user[field.name] : 
       (user.name && user.name[field.name]) || ''

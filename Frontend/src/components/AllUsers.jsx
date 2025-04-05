@@ -99,6 +99,7 @@ const UserCard = ({users,type}) => {
         </Card>
         </Grid2>
         </>
+        
             )
         }
     )
