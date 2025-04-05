@@ -20,7 +20,7 @@ app.use(express.json());
 app.post("/add-student",async (req,res)=>{
     try {
         await studentModel(req.body).save();
-        res.send("Added student successfully!");
+        res.json({message:"Added student successfully!"});
         console.log("Added student successfully!");
     } catch (error) {
         console.log(err);
@@ -31,7 +31,7 @@ app.post("/add-student",async (req,res)=>{
 app.post("/add-teacher",async (req,res)=>{
     try {
         await teacherModel(req.body).save();
-        res.send("Added teacher successfully!");
+        res.json({message:"Added teacher successfully!"});
         console.log("Added teacher successfully!");
     } catch (error) {
         console.log(err);
@@ -40,7 +40,7 @@ app.post("/add-teacher",async (req,res)=>{
 app.post("/add-admin",async (req,res)=>{
     try {
         await adminModel(req.body).save();
-        res.send("Added admin successfully!");
+        res.json({message:"Added admin successfully!"});
         console.log("Added admin successfully!");
     } catch (error) {
         console.log(err);
@@ -147,17 +147,43 @@ app.get("/all-users",async (req,res)=>{
    }
 })
 
-app.put("/user/:id", async (req,res)=>{
-    try{
-        await studentModel.findByIdAndUpdate(req.params.id,req.body)
-        res.json({message:"User Updated!"})
-        console.log({message:"User updated!"})
+app.post("/update-student", async (req, res) => {
+    try {
+        const { _id, ...updateData } = req.body;
+        await studentModel.findByIdAndUpdate(_id, updateData);
+        res.json({message:"Updated student successfully!"});
+        console.log("Updated student successfully!");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Error updating student");
     }
-    catch(err){
-        console.log(err)
-        res.json({message:"User updation failed!"})
+});
+
+// Update Teacher
+app.post("/update-teacher", async (req, res) => {
+    try {
+        const { _id, ...updateData } = req.body;
+        await teacherModel.findByIdAndUpdate(_id, updateData);
+        res.json({message:"Updated teacher successfully!"});
+        console.log("Updated teacher successfully!");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Error updating teacher");
     }
-})
+});
+
+// Update Admin
+app.post("/update-admin", async (req, res) => {
+    try {
+        const { _id, ...updateData } = req.body;
+        await adminModel.findByIdAndUpdate(_id, updateData);
+        res.json({message:"Updated admin successfully!"});
+        console.log("Updated admin successfully!");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Error updating admin");
+    }
+});
 
 app.delete("/user/:id", async (req,res)=>{
     try{

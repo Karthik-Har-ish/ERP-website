@@ -72,8 +72,8 @@ const UserCard = ({users,type}) => {
     }
 
 
-    function updateUser(){
-        navigate("/product-add",{state:{val}})
+    function updateUser(user){
+        navigate("/add-user", { state: { userToEdit: user, userType:type } })
     }
     const userEls = users.map((user)=>{
         return (<>
@@ -93,7 +93,7 @@ const UserCard = ({users,type}) => {
             {user.subject===undefined?null:<h2>Subject: {user.subject}</h2>}
             </div>
             <CardActions>
-                <Button size="small" sx={{color:"#90323D"}} onClick={updateUser}>Update</Button>
+                <Button size="small" sx={{color:"#90323D"}} onClick={()=>{console.log(type);updateUser(user, type)}}>Update</Button>
                 <Button size="small" sx={{color:"#90323D"}} onClick={()=>{console.log(user._id);deleteUser(user._id,type)}}>Delete</Button>
             </CardActions>
         </Card>
